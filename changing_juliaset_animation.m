@@ -19,6 +19,7 @@ function f = changing_juliaset(c, c_inc, filename, num_iterations)
 
     for kk=1:num_iterations
         
+        % Build matrix of initial values
         A = 1.5;                          % Set 
         N = 1000;                         % Set array size
         x_vec = -A + (0:N) / N * 2 * A;   % Create 
@@ -33,10 +34,10 @@ function f = changing_juliaset(c, c_inc, filename, num_iterations)
             end;
         end;
         
-        z = x+sqrt(-1)*y;
+        z = x + i*y;
         f = @(z) z.^2 + c;
 
-        % Iterate 25 function calls
+        % Iterate 25 function calls (perform fixed point iteration)
         for k=1:25
             
             z = f(z);
@@ -48,7 +49,6 @@ function f = changing_juliaset(c, c_inc, filename, num_iterations)
         a=1-a;
         a=(a>0); a=a+1;
         
-        subplot(111);
         b = rot90(a);
         image([-A,A],[-A,A],b);
         colormap([1 0 0; 1 1 1]);
